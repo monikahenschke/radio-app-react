@@ -1,3 +1,44 @@
-.App {
-    background: green;
+$base-color: #FFCD1B;
+$black-color: #202020;
+$gray-color: #606060;
+$background-color: #e5e5e5;
+$white-color: #ffffff;
+
+
+.button {
+    border: none;
+    cursor: pointer;
+     &--large {
+        background: $base-color;
+        color: $black-color;
+        padding: 6px;
+        width: 50px;
+        height: 50px;
+        & img{
+            height: 28px;
+            width: 28px;
+        }
+     }
+     &--medium {
+        color: $gray-color;
+        background: $white-color;
+        padding: 3px;
+        height: 22px;
+        width: 22px;
+         & img {
+            height: 100%;
+            width: 100%;
+         }
+     }
+     &--small {
+        color: $gray-color;
+        background: $white-color;
+        padding: 2px;
+        width: 10px;
+        height: 10px;
+        & img {
+            height: 100%;
+            width: 100%;
+         }
+     }
 }
