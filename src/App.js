@@ -5,24 +5,12 @@ function App() {
     <div className="App">
       <header className="App-header">Hello!</header>
       <Button
+        type="button"
         children="Play"
         onClick={clickPlay}
         icon="play-large.svg"
-        iconOnly={true}
+        iconOnly
         size="large"
-      />
-      <Button
-        children="Play2"
-        iconOnly={true}
-        icon="play-medium.svg"
-        onClick={clickPlay2}
-      />
-      <Button
-        children="Play2"
-        iconOnly={true}
-        icon="play-medium.svg"
-        onClick={clickPlay2}
-        size="small"
       />
     </div>
   );
@@ -30,10 +18,6 @@ function App() {
 
 function clickPlay() {
   console.log('play');
-}
-
-function clickPlay2() {
-  console.log('play2');
 }
 
 export default App;

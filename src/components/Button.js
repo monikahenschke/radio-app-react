@@ -1,23 +1,15 @@
+import propTypes from 'prop-types';
 import { func } from 'prop-types';
-import { string } from 'prop-types';
+import { ReactComponent as IconLarge } from '../images/play-large.svg';
 
-function Button(props) {
-  return (
-    <button
-      className={'button button--' + (props.size ? props.size : 'medium')}
-      onClick={props.onClick}
-    >
-      {props.iconOnly ? (
-        <img alt={props.children} src={require('../images/' + props.icon)} />
-      ) : (
-        props.children
-      )}
-    </button>
-  );
-}
+const Button = ({ iconOnly, size, icon, children, ...props }) => (
+  <button className={'button button--' + (size ? size : 'medium')} {...props}>
+    {iconOnly ? <IconLarge /> : children}
+  </button>
+);
 
 Button.propTypes = {
-  children: string.isRequired,
+  children: propTypes.node.isRequired,
   onClick: func.isRequired,
 };
 
