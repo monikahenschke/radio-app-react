@@ -7,8 +7,15 @@ const Button = ({
   children,
   ...props
 }) => (
-  <button className={'button button--' + (size ?? 'medium')} {...props}>
-    {iconOnly ? <IconComponent /> : children}
+  <button
+    className={
+      'button ' +
+      (size ? 'button--' + size : '') +
+      (iconOnly && IconComponent ? ' icon' : '')
+    }
+    {...props}
+  >
+    {iconOnly && IconComponent ? <IconComponent /> : children}
   </button>
 );
 

@@ -1,5 +1,4 @@
 import Button from './components/Button';
-import { ReactComponent as IconLarge } from './images/play-large.svg';
 
 function App() {
   return (
@@ -7,10 +6,8 @@ function App() {
       <header className="App-header">Hello!</header>
       <Button
         type="button"
-        children="Play"
+        children="Add new radio station"
         onClick={clickPlay}
-        icon={IconLarge}
-        iconOnly
         size="large"
       />
     </div>
