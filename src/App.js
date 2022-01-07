@@ -1,4 +1,5 @@
 import Button from './components/Button';
+import { ReactComponent as IconLarge } from './images/play-large.svg';
 
 function App() {
   return (
@@ -8,7 +9,7 @@ function App() {
         type="button"
         children="Play"
         onClick={clickPlay}
-        icon="play-large.svg"
+        icon={IconLarge}
         iconOnly
         size="large"
       />

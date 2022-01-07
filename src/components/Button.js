@@ -1,10 +1,14 @@
-import propTypes from 'prop-types';
-import { func } from 'prop-types';
-import { ReactComponent as IconLarge } from '../images/play-large.svg';
+import propTypes, { func } from 'prop-types';
 
-const Button = ({ iconOnly, size, icon, children, ...props }) => (
-  <button className={'button button--' + (size ? size : 'medium')} {...props}>
-    {iconOnly ? <IconLarge /> : children}
+const Button = ({
+  iconOnly,
+  size,
+  icon: IconComponent,
+  children,
+  ...props
+}) => (
+  <button className={'button button--' + (size ?? 'medium')} {...props}>
+    {iconOnly ? <IconComponent /> : children}
   </button>
 );
 
