@@ -21,7 +21,7 @@ $white-color: #ffffff;
         width: 16px;
         height: 16px;
     }
-     &--large {
+    &.big {
         padding: 6px;
         font-size: 14px;
         &.icon {
@@ -33,7 +33,7 @@ $white-color: #ffffff;
             width: 28px;
         }
      }
-     &--small {
+     &.small {
         padding: 2px;
         font-size: 11px;
 

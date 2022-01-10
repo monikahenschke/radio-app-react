@@ -1,4 +1,6 @@
 import propTypes, { func } from 'prop-types';
+import styles from './Button.module.scss';
+import cx from 'classnames';
 
 const Button = ({
   iconOnly,
@@ -6,18 +8,16 @@ const Button = ({
   icon: IconComponent,
   children,
   ...props
-}) => (
-  <button
-    className={
-      'button ' +
-      (size ? 'button--' + size : '') +
-      (iconOnly && IconComponent ? ' icon' : '')
-    }
-    {...props}
-  >
-    {iconOnly && IconComponent ? <IconComponent /> : children}
-  </button>
-);
+}) => {
+  const iconClass = iconOnly && IconComponent ? styles.icon : undefined;
+  const sizeClass = size && styles[size];
+
+  return (
+    <button className={cx(styles.button, sizeClass, iconClass)} {...props}>
+      {iconOnly && IconComponent ? <IconComponent /> : children}
+    </button>
+  );
+};
 
 Button.propTypes = {
   children: propTypes.node.isRequired,

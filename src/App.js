@@ -8,7 +8,7 @@ function App() {
         type="button"
         children="Add new radio station"
         onClick={clickPlay}
-        size="large"
+        size="big"
       />
     </div>
   );
