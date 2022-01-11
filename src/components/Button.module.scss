@@ -4,7 +4,6 @@ $gray-color: #606060;
 $background-color: #e5e5e5;
 $white-color: #ffffff;
 
-
 .button {
     background: $base-color;
     color: $black-color;
@@ -34,7 +33,7 @@ $white-color: #ffffff;
         }
      }
      &.small {
-        padding: 2px;
+        padding: 3px;
         font-size: 11px;
 
         &.icon {
