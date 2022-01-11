@@ -10,8 +10,7 @@ test('check if any text is present (it should not) if you pass the iconOnly and 
   render(
     <Button onClick={clickPlay} icon={IconLarge} iconOnly children="Play" />
   );
-  const icon = screen.queryByTestId('buttonIcon');
-  expect(icon).toBeInTheDocument();
+  screen.getByTestId('buttonIcon');
 
   const textButton = screen.queryByText('Play');
   expect(textButton).not.toBeInTheDocument();
