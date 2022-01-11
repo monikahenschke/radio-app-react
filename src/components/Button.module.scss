@@ -1,0 +1,49 @@
+$base-color: #FFCD1B;
+$black-color: #202020;
+$gray-color: #606060;
+$background-color: #e5e5e5;
+$white-color: #ffffff;
+
+
+.button {
+    background: $base-color;
+    color: $black-color;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    font-size: 12px;
+    font-weight: 400;
+    &.icon {
+        width: 28px;
+        height: 28px;
+    }
+    & svg {
+        width: 16px;
+        height: 16px;
+    }
+    &.big {
+        padding: 6px;
+        font-size: 14px;
+        &.icon {
+            width: 50px;
+            height: 50px;
+        }
+        & svg{
+            height: 28px;
+            width: 28px;
+        }
+     }
+     &.small {
+        padding: 2px;
+        font-size: 11px;
+
+        &.icon {
+            width: 14px;
+            height: 14px;
+        }
+        & svg {
+            height: 8px;            
+            width: 8px;
+         }
+     }
+}
