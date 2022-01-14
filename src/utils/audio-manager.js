@@ -2,12 +2,20 @@ import { func } from 'prop-types';
 
 class AudioManager {
   constructor(url) {
+    if (!url) {
+      throw new Error('You have to pass a url as the argument!');
+    }
     this.audio = new Audio(url);
-    this.setNewStation(url);
   }
 
   play() {
-    this.audio.play();
+    this.audio
+      .play()
+      .then(() => null)
+      .catch((error) => {
+        console.error(`Error has occured while trying to play!`);
+        throw error;
+      });
   }
 
   pause() {
@@ -15,20 +23,21 @@ class AudioManager {
   }
 
   select(url) {
-    this.audio.pause();
-    this.audio.currentTime = 0;
     this.setNewStation(url);
     this.play();
   }
 
   setNewStation(url) {
+    if (!url) {
+      throw new Error('You have to pass a url as the argument!');
+    }
     this.audio.setAttribute('src', url);
   }
 }
 
 let audioManagerInstance = null;
-const getInstance = (url) => {
+const getAudioManager = (url) => {
   return (audioManagerInstance ??= new AudioManager(url));
 };
 
-export default getInstance;
+export default getAudioManager;

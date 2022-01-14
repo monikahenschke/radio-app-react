@@ -1,10 +1,10 @@
 import Button from './components/Button';
-import AudioManager from './utils/audio-manager';
+import getAudioManager from './utils/audio-manager';
 const hardcodedRadioUrl = 'http://17573.live.streamtheworld.com/WCTKFMAAC.aac';
 const hardcodedRadioUrl1 = 'http://icepool.silvacast.com/COUNTRY108.mp3';
 
 const App = () => {
-  const audioManagerInstance = AudioManager(hardcodedRadioUrl);
+  const audioManagerInstance = getAudioManager(hardcodedRadioUrl);
 
   const handlePlay = () => {
     audioManagerInstance.play();
