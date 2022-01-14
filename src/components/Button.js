@@ -19,7 +19,7 @@ const Button = ({
   }
   return (
     <button className={cx(styles.button, sizeClass, iconClass)} {...props}>
-      {iconOnly && IconComponent ? <IconComponent /> : children}
+      {iconOnly ? <IconComponent data-testid="buttonIcon" /> : children}
     </button>
   );
 };
