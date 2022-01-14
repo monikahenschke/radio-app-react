@@ -2,6 +2,7 @@ import { func } from 'prop-types';
 
 class AudioManager {
   constructor(url) {
+    this.audio = new Audio(url);
     this.setNewStation(url);
   }
 
@@ -21,12 +22,11 @@ class AudioManager {
   }
 
   setNewStation(url) {
-    this.audio = new Audio(url);
+    this.audio.setAttribute('src', url);
   }
 }
 
 let audioManagerInstance = null;
-
 const getInstance = (url) => {
   return (audioManagerInstance ??= new AudioManager(url));
 };
