@@ -2,13 +2,13 @@ import { func } from 'prop-types';
 
 class AudioManager {
   constructor(url) {
-    if (!url) {
-      throw new Error('You have to pass a url as the argument!');
-    }
     this.audio = new Audio(url);
   }
 
   play() {
+    if (!this.audio.src) {
+      return;
+    }
     this.audio
       .play()
       .then(() => null)
