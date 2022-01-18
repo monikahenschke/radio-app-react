@@ -1,33 +1,47 @@
 import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
-import getAudioManager from './audio-manager';
+const playMock = jest.fn();
+Audio.prototype.play = async () => playMock();
+let getAudioManager;
+
+beforeEach(() => {
+  jest.resetModules();
+  getAudioManager = require('./audio-manager').default;
+});
 
 test('Check if getAudioManager() has been called twice, is still the same instance of class', () => {
   const first = getAudioManager();
   const second = getAudioManager();
-
   expect(first === second).toBeTruthy();
 });
 
 test('Check if getAudioManager() has been called with no args then play() returns undefined ', async () => {
   const instanceOfAudioManager = getAudioManager();
-  const playMethod = await instanceOfAudioManager.play();
+  await instanceOfAudioManager.play();
 
-  expect(playMethod).toBeUndefined();
+  expect(playMock).not.toHaveBeenCalled();
 });
 
-test('Check if getAudioManager() has been called with the argument, then Audio object is playing ', async () => {
+test('Check if getAudioManager() has been called with the argument, then play() is called ', async () => {
   const instanceOfAudioManager = getAudioManager(
     'http://icepool.silvacast.com/COUNTRY108.mp3'
   );
   await instanceOfAudioManager.play();
-
-  expect(instanceOfAudioManager.audio.paused).toBeFalsy();
+  expect(playMock).toHaveBeenCalled();
 });
 
-test('Check if getAudioManager() has been called with no argument, then Audio object is not playing ', async () => {
-  const instanceOfAudioManager = getAudioManager();
-  await instanceOfAudioManager.play();
+test('What if play() throw exception', async () => {
+  Audio.prototype.play = async () => {
+    throw new Error();
+  };
 
-  expect(instanceOfAudioManager.audio.paused).toBeTruthy();
+  const instanceOfAudioManager = getAudioManager(
+    'http://icepool.silvacast.com/COUNTRY108.mp3'
+  );
+  await expect(instanceOfAudioManager.play()).rejects.toThrow();
+});
+
+test('Calling select() with no url passed', () => {
+  const instanceOfAudioManager = getAudioManager();
+  expect(instanceOfAudioManager.select).toThrow();
 });
