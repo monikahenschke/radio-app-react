@@ -1,4 +1,3 @@
-import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
 const playMock = jest.fn();
 Audio.prototype.play = async () => playMock();
@@ -15,14 +14,14 @@ test('Check if getAudioManager() has been called twice, is still the same instan
   expect(first === second).toBeTruthy();
 });
 
-test('Check if getAudioManager() has been called with no args then play() returns undefined ', async () => {
+test('Check if getAudioManager() has been called with no args then play() returns undefined', async () => {
   const instanceOfAudioManager = getAudioManager();
   await instanceOfAudioManager.play();
 
   expect(playMock).not.toHaveBeenCalled();
 });
 
-test('Check if getAudioManager() has been called with the argument, then play() is called ', async () => {
+test('Check if getAudioManager() has been called with the argument, then play() is called', async () => {
   const instanceOfAudioManager = getAudioManager(
     'http://icepool.silvacast.com/COUNTRY108.mp3'
   );
