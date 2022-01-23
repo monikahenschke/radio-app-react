@@ -42,7 +42,6 @@ const App = () => {
   };
 
   const handleSelect = (selectedStation) => {
-    console.log(selectedStation);
     audioManagerInstance.select(selectedStation);
   };
 

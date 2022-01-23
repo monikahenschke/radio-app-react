@@ -2,7 +2,6 @@ import React from 'react';
 import Button from './Button';
 
 export const StationsList = ({ stations, handleSelect, ...props }) => {
-  console.log(stations);
   return (
     <ul>
       {stations.map((station) => (
