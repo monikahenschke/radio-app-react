@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Button from './components/Button';
 import StationsList from './components/StationsList';
 import getAudioManager from './utils/audio-manager';
@@ -30,7 +31,11 @@ const radioStationsArray = [
     link: 'https://listen.181fm.com/181-kickincountry_128k.mp3',
   },
 ];
+
 const App = () => {
+  const [radioStationsState, setRadioStationsState] =
+    useState(radioStationsArray);
+
   const audioManagerInstance = getAudioManager(hardcodedRadioUrl);
 
   const handlePlay = () => {
@@ -48,7 +53,7 @@ const App = () => {
   return (
     <div className="App">
       <header className="App-header">Hello!</header>
-      <StationsList stations={radioStationsArray} handleSelect={handleSelect} />
+      <StationsList stations={radioStationsState} handleSelect={handleSelect} />
       <Button type="button" children="Play" onClick={handlePlay} size="big" />
       <Button type="button" children="Pause" onClick={handlePause} size="big" />
       <Button type="button" children="Station X " onClick={handleSelect} />
