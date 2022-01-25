@@ -1,7 +1,13 @@
+import { array } from 'prop-types';
 import React from 'react';
 import Button from './Button';
 
 export const StationsList = ({ stations, handleSelect, ...props }) => {
+  if (!stations || stations.length === 0) {
+    const textError =
+      'Your stations array is empty! You need to have at least one station to create the StationsList component.';
+    throw new Error(textError);
+  }
   return (
     <ul>
       {stations.map((station) => (
@@ -14,5 +20,8 @@ export const StationsList = ({ stations, handleSelect, ...props }) => {
       ))}
     </ul>
   );
+};
+StationsList.propTypes = {
+  stations: array.isRequired,
 };
 export default StationsList;
