@@ -1,27 +1,41 @@
 import '@testing-library/jest-dom/extend-expect';
-const playMock = jest.fn();
-Audio.prototype.play = async () => playMock();
 let getAudioManager;
+let playMock;
 
 beforeEach(() => {
   jest.resetModules();
-  getAudioManager = require('./audio-manager').default;
+  if (typeof playMock !== 'function') {
+    playMock = jest.fn().mockResolvedValue();
+  }
+  global.Audio = jest.fn().mockImplementation(function (url) {
+    this.src = url;
+    this.play = playMock;
+    this.setAttribute = jest.fn();
+  });
+
+  import('./audio-manager').then((module) => {
+    getAudioManager = module.default;
+  });
 });
 
-test('Check if getAudioManager() has been called twice, is still the same instance of class', () => {
+afterEach(() => {
+  playMock = null;
+});
+
+test('if getAudioManager() has been called twice, should be still the same instance of class', () => {
   const first = getAudioManager();
   const second = getAudioManager();
   expect(first === second).toBeTruthy();
 });
 
-test('Check if getAudioManager() has been called with no args then play() returns undefined', async () => {
+test('if getAudioManager() has been called with no args then play() shouldnt be called', async () => {
   const instanceOfAudioManager = getAudioManager();
   await instanceOfAudioManager.play();
 
   expect(playMock).not.toHaveBeenCalled();
 });
 
-test('Check if getAudioManager() has been called with the argument, then play() is called', async () => {
+test(' if getAudioManager() has been called with the argument, then play() should be called', async () => {
   const instanceOfAudioManager = getAudioManager(
     'http://icepool.silvacast.com/COUNTRY108.mp3'
   );
@@ -29,10 +43,9 @@ test('Check if getAudioManager() has been called with the argument, then play() 
   expect(playMock).toHaveBeenCalled();
 });
 
-test('What if play() throw exception', async () => {
-  Audio.prototype.play = async () => {
-    throw new Error();
-  };
+test('play() should throw ', async () => {
+  playMock = jest.fn().mockRejectedValue(new Error());
+  console.error = jest.fn();
 
   const instanceOfAudioManager = getAudioManager(
     'http://icepool.silvacast.com/COUNTRY108.mp3'
@@ -40,7 +53,7 @@ test('What if play() throw exception', async () => {
   await expect(instanceOfAudioManager.play()).rejects.toThrow();
 });
 
-test('Calling select() with no url passed', () => {
+test('select() with no args passed should throw', () => {
   const instanceOfAudioManager = getAudioManager();
   expect(instanceOfAudioManager.select).toThrow();
 });

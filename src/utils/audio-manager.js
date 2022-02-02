@@ -3,7 +3,7 @@ class AudioManager {
     this.audio = new Audio(url);
   }
 
-  async play() {
+  play() {
     if (!this.audio.src) {
       return;
     }
