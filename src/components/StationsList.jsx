@@ -9,7 +9,7 @@ export const StationsList = ({ stations, handleSelect, ...props }) => {
     throw new Error(textError);
   }
   return (
-    <ul>
+    <ul data-testid="stationsList">
       {stations.map((station) => (
         <li className="station" key={station.id}>
           <Button
