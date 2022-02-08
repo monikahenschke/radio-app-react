@@ -1,3 +1,5 @@
+import { func } from 'prop-types';
+
 class AudioManager {
   constructor(url) {
     this.audio = new Audio(url);
