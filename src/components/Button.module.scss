@@ -1,8 +1,4 @@
-$base-color: #FFCD1B;
-$black-color: #202020;
-$gray-color: #606060;
-$background-color: #e5e5e5;
-$white-color: #ffffff;
+@import './Layout/Colors.module.scss';
 
 .button {
     background: $base-color;

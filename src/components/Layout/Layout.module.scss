@@ -1,0 +1,17 @@
+@import './Colors.module.scss';
+
+.Layout {
+}
+
+.topBar {
+    height: 30px;
+    font-size: 20px;
+    padding: 10px;
+    background: $background-color;
+}
+.bottomBar {
+  background: $background-color;
+}
+
+.content {
+}
