@@ -51,7 +51,7 @@ const Content = (props) => {
     useState(radioStationsArray);
 
   return (
-    <div className={styles.Content}>
+    <div data-testid="content" className={styles.Content}>
       <StationsList stations={radioStationsState} handleSelect={handleSelect} />
     </div>
   );
