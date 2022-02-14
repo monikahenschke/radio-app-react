@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import StationsList from './StationsList';
+import StationsList from '../components/StationsList';
 import styles from './Content.module.scss';
 import getAudioManager from '../utils/audio-manager';
 const hardcodedRadioUrl = 'http://17573.live.streamtheworld.com/WCTKFMAAC.aac';

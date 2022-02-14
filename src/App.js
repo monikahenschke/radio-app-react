@@ -1,5 +1,5 @@
-import { Layout } from './components/Layout/Layout';
-import Content from './components/Content';
+import { Layout } from './components/Layout';
+import Content from './containers/Content';
 
 function App() {
   return (
