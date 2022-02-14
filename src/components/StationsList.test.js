@@ -15,10 +15,9 @@ test('if component renders a valid HTML element', () => {
   expect(screen.getByTestId('stationsList')).toBeInTheDocument();
 });
 
-test('if component throw error when array is empty', () => {
+test('if component render an <ul> element, when array is empty', () => {
   const array = [];
   console.error = jest.fn();
-  expect(() =>
-    render(<StationsList stations={array} handleSelect={fn}></StationsList>)
-  ).toThrow();
+  render(<StationsList stations={array} handleSelect={fn}></StationsList>);
+  expect(screen.getByTestId('stationsList')).toBeInTheDocument();
 });
