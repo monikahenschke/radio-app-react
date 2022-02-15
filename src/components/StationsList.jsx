@@ -19,4 +19,5 @@ export const StationsList = ({ stations, handleSelect, ...props }) => {
 StationsList.propTypes = {
   stations: array.isRequired,
 };
+
 export default StationsList;
