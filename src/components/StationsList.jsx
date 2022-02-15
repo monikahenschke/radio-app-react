@@ -1,9 +1,10 @@
+import { array } from 'prop-types';
 import React from 'react';
 import Button from './Button';
 
 export const StationsList = ({ stations, handleSelect, ...props }) => {
   return (
-    <ul>
+    <ul data-testid="stationsList">
       {stations.map((station) => (
         <li className="station" key={station.id}>
           <Button
@@ -15,4 +16,8 @@ export const StationsList = ({ stations, handleSelect, ...props }) => {
     </ul>
   );
 };
+StationsList.propTypes = {
+  stations: array.isRequired,
+};
+
 export default StationsList;
