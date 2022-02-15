@@ -1,3 +1,4 @@
+import { array } from 'prop-types';
 import React from 'react';
 import Button from './Button';
 
@@ -15,4 +16,8 @@ export const StationsList = ({ stations, handleSelect, ...props }) => {
     </ul>
   );
 };
+StationsList.propTypes = {
+  stations: array.isRequired,
+};
+
 export default StationsList;

@@ -32,6 +32,7 @@ const radioStationsArray = [
   },
 ];
 
+const App = () => {
   const [radioStationsState, setRadioStationsState] =
     useState(radioStationsArray);
 
@@ -44,7 +45,6 @@ const radioStationsArray = [
   const handlePause = () => {
     audioManagerInstance.pause();
   };
-
 
   const handleSelect = (selectedStation) => {
     audioManagerInstance.select(selectedStation);
