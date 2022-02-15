@@ -4,7 +4,7 @@ import Button from './Button';
 
 export const StationsList = ({ stations, handleSelect, ...props }) => {
   return (
-    <ul>
+    <ul data-testid="stationsList">
       {stations.map((station) => (
         <li className="station" key={station.id}>
           <Button
