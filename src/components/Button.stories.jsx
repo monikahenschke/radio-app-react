@@ -13,7 +13,7 @@ export default {
       defaultValue: 'Button',
     },
     size: {
-      options: ['small', 'big'],
+      options: ['small', 'big', 'default'],
       control: { type: 'radio' },
     },
   },
@@ -24,18 +24,6 @@ const Template = (args) => <Button {...args} />;
 export const Default = Template.bind({});
 Default.args = {
   onClick: undefined,
-};
-
-export const Small = Template.bind({});
-Small.args = {
-  onClick: undefined,
-  size: 'small',
-};
-
-export const Big = Template.bind({});
-Big.args = {
-  onClick: undefined,
-  size: 'big',
 };
 
 export const Icon = Template.bind({});
