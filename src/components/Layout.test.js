@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom/extend-expect';
 import { render, screen } from '@testing-library/react';
 import { Layout } from './Layout';
-import Content from '../Content';
+import Content from '../containers/Content';
 
 test('if layout component renders properly', () => {
   render(<Layout />);
