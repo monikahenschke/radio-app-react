@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import StationsList from '../components/StationsList';
 import styles from './Content.module.scss';
+import Button from '../components/Button';
 import getAudioManager from '../utils/audio-manager';
 const hardcodedRadioUrl = 'http://17573.live.streamtheworld.com/WCTKFMAAC.aac';
 
@@ -52,7 +53,9 @@ const Content = (props) => {
 
   return (
     <div data-testid="content" className={styles.Content}>
-      <StationsList stations={radioStationsState} handleSelect={handleSelect} />
+      <StationsList stations={radioStationsState} handleSelect={handleSelect}>
+        <Button onClick={() => {}} children="" />
+      </StationsList>
     </div>
   );
 };
