@@ -3,6 +3,7 @@ import StationsList from '../components/StationsList';
 import styles from './Content.module.scss';
 import Button from '../components/Button';
 import getAudioManager from '../utils/audio-manager';
+import StationsListItem from '../components/StationsListItem';
 const hardcodedRadioUrl = 'http://17573.live.streamtheworld.com/WCTKFMAAC.aac';
 
 const radioStationsArray = [
@@ -53,8 +54,15 @@ const Content = (props) => {
 
   return (
     <div data-testid="content" className={styles.Content}>
-      <StationsList stations={radioStationsState} handleSelect={handleSelect}>
-        <Button onClick={() => {}} children="" />
+      <StationsList handleSelect={handleSelect}>
+        {radioStationsState.map((station, i) => (
+          <StationsListItem
+            key={i}
+            title={station.name}
+            title2={station.link}
+            button={true}
+          ></StationsListItem>
+        ))}
       </StationsList>
     </div>
   );
