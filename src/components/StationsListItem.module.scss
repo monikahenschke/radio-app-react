@@ -1,0 +1,11 @@
+@import 'src/styles/colors';
+
+.StationsListItem {
+
+    height: 42px;
+    border-bottom: 1px solid $background-color;
+
+    &__name {
+        margin-right: 10px;
+    }
+}

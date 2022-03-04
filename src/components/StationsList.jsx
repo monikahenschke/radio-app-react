@@ -1,23 +1,13 @@
-import { array } from 'prop-types';
 import React from 'react';
-import Button from './Button';
 
-export const StationsList = ({ stations, handleSelect, ...props }) => {
+export const StationsList = ({ handleSelect, children, ...props }) => {
   return (
     <ul data-testid="stationsList">
-      {stations.map((station) => (
-        <li className="station" key={station.id}>
-          <Button
-            onClick={() => handleSelect(station.link)}
-            children={station.name}
-          ></Button>
-        </li>
+      {React.Children.map(children, (child) => (
+        <li className="station">{child}</li>
       ))}
     </ul>
   );
-};
-StationsList.propTypes = {
-  stations: array.isRequired,
 };
 
 export default StationsList;
