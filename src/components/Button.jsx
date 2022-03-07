@@ -3,6 +3,7 @@ import styles from './Button.module.scss';
 import cx from 'classnames';
 
 const Button = ({
+  innerRef,
   iconOnly,
   size,
   icon: IconComponent,
@@ -18,7 +19,11 @@ const Button = ({
     throw new Error(errorText);
   }
   return (
-    <button className={cx(styles.button, sizeClass, iconClass)} {...props}>
+    <button
+      ref={innerRef}
+      className={cx(styles.button, sizeClass, iconClass)}
+      {...props}
+    >
       {iconOnly ? <IconComponent data-testid="buttonIcon" /> : children}
     </button>
   );

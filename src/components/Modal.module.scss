@@ -1,0 +1,32 @@
+@import 'src/styles/colors';
+
+.ModalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0,0,0,0.7);
+    z-index: 999;
+
+}
+.Modal {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: $white-color;
+    z-index: 999;
+    padding: 30px;
+    border: 1px solid $base-color;
+
+    &:focus-within {
+        background: green;
+    }
+    &:not(:focus-within) {
+        background-color:red;
+        transition: background-color 0.01s;
+      }
+
+
+}
