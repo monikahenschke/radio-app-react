@@ -15,12 +15,12 @@ The Country Radio app it is the second, more extensive version of https://github
 
 ________________________________________
 
-If you would like boot up the project, you can: 
-- download it and run in the project directory
+If you would like boot up the project, you can:
+- download it and run in the project directory. 
+  You will need Yarn Package Manager. You can install it using terminal and `yarn install` command.
+  If Yarn is arleady installed run the app in the development mode using command:
+  `yarn start`.
 
-  ### `yarn start`
-
-  Runs the app in the development mode.
   Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
   
  - or check it through Netlify: https://radio-app321.netlify.app 
