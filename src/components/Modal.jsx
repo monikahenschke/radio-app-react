@@ -1,39 +1,40 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
+import FocusTrap from 'focus-trap-react';
 import ReactDom from 'react-dom';
 import Button from './Button';
 import styles from './Modal.module.scss';
-const modalRoot = document.getElementById('portal');
 
-const ModalDefault = ({ children, modalIsOpen, setModalIsOpen, ...props }) => {
-  const modalRef = useRef(null);
-  const closeModalButtonRef = useRef(null);
+const ModalDefault = ({
+  children,
+  buttonName,
+  isModalOpen,
+  setModalIsOpen,
+}) => {
+  const portal = useRef(document.createElement('div'));
 
   useEffect(() => {
-    if (modalIsOpen) {
-      closeModalButtonRef.current.focus();
+    document.body.appendChild(portal.current);
+    portal.current.classList.add('Modal');
 
-      modalRef.current.addEventListener('transitionend', () => {
-        closeModalButtonRef.current.focus();
-      });
-    }
-  }, [modalIsOpen]);
-  if (!modalIsOpen) return null;
+    return () => {
+      portal.current.parentNode.removeChild(portal.current);
+    };
+  }, []);
+
+  if (!isModalOpen) return null;
 
   return ReactDom.createPortal(
-    <div className={styles.ModalOverlay}>
-      <div className={styles.Modal} ref={modalRef}>
-        <h3>Hello!</h3>
-        {children}
-        <Button
-          innerRef={closeModalButtonRef}
-          children={<p>Okay</p>}
-          onClick={() => setModalIsOpen(false)}
-        />
-
-        <Button children={<p>Check</p>} onClick={() => {}} />
+    <FocusTrap>
+      <div className={styles.overlay}>
+        <div className={styles.content}>
+          {children}
+          <Button size="big" onClick={() => setModalIsOpen(false)}>
+            {buttonName ? buttonName : 'Okay!'}
+          </Button>
+        </div>
       </div>
-    </div>,
-    modalRoot
+    </FocusTrap>,
+    portal.current
   );
 };
 
