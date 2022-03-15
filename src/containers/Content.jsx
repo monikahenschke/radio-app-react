@@ -14,6 +14,8 @@ const Content = (props) => {
 
   return (
     <div data-testid="content" className={styles.Content}>
+      <p className={styles.ContentHeadline}>Your favourite radio stations</p>
+
       <StationsList handleSelect={handleSelect}>
         {radioStationsLS.map((station, i) => (
           <StationsListItem

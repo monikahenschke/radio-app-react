@@ -1,6 +1,7 @@
 @import 'src/styles/colors';
 
 .button {
+    font-family: 'Saira', sans-serif;
     background: $base-color;
     color: $black-color;
     border: none;
@@ -11,6 +12,9 @@
     &.icon {
         width: 28px;
         height: 28px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     & svg {
         width: 16px;

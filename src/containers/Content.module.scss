@@ -1,4 +1,13 @@
+@import 'src/styles/colors';
 
 li {
     list-style: none;
+}
+
+.ContentHeadline {
+    padding: 9px 6px;
+    font-size: 14px;
+    margin: 0;
+    color: $headline-color;
+    font-weight: 500;
 }
