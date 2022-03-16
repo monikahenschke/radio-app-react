@@ -1,0 +1,48 @@
+@import '/src/styles/colors';
+
+.bottomBar {
+    background: #f9f9f9;
+    display: flex;
+    justify-content: end;
+    padding: 7px;
+  
+    & button {
+      font-weight: 500;
+      padding: 3px 8px;
+    }
+  
+  }
+  .addNewStationModal {
+      & p {
+          text-align: center;
+          font-size: 18px;
+          font-weight: 500;
+      }
+  }
+  .addNewStationInput {
+      height: 40px;
+      display: flex;
+      width: 336px;
+      & input, button {
+          font-weight: 500;
+          height: 100%;
+      }
+      & button {
+          min-width: 76px;
+      }
+      & input {
+          flex-grow: 1;
+          font-family: 'Saira', sans-serif;
+          padding: 0;
+          padding-left: 15px;
+          font-size: 14px;
+          margin: 0;
+          border: none;
+          background: $gray-input-color;
+          margin-right: 7px;
+      }
+  }
+
+  .addNewStationModalContent {
+    display: flex;
+  }

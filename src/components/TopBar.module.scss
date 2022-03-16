@@ -1,0 +1,22 @@
+@import '/src/styles/colors';
+
+.topBar {
+    background: $background-color2;
+    display: flex;
+    justify-content: space-between;
+}
+
+.container {
+    padding: 3px 6px;
+}
+.headline {
+    font-size: 10px;
+    margin: 0;
+    color: $headline-color;
+}
+.stationsName {
+    font-size: 18px;
+    margin: 0;
+    font-weight: 500;
+    padding-left: 12px;
+}

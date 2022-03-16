@@ -1,4 +1,4 @@
-export function toShorterUrl(longUrl) {
+export function shortenUrl(longUrl) {
   let domainNameShortened;
   const splitedUrl = longUrl.split('/').filter((v) => v);
   console.log(splitedUrl.length);
