@@ -1,17 +1,7 @@
 @import 'src/styles/colors';
 
 .Layout {
-}
-
-.topBar {
-    height: 30px;
-    font-size: 20px;
-    padding: 10px;
-    background: $background-color;
-}
-.bottomBar {
-  background: $background-color;
-}
-
-.content {
+  width: 650px;
+  background: $white-color;
+  margin: 60px 0;
 }

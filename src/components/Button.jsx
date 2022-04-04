@@ -2,6 +2,8 @@ import propTypes, { func } from 'prop-types';
 import styles from './Button.module.scss';
 import cx from 'classnames';
 
+//size prop: small, big or undefined
+
 const Button = ({
   innerRef,
   iconOnly,

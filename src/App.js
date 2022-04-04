@@ -2,6 +2,7 @@ import Cookies from 'js-cookie';
 import { Layout } from './components/Layout';
 import Content from './containers/Content';
 import { setBasicRadioStationsToLS } from './utils/setBasicRadioStations';
+import './styles/App.scss';
 
 function App() {
   if (!Cookies.get('visited')) {

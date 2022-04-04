@@ -5,14 +5,6 @@ import StationsListItem from '../components/StationsListItem';
 
 const audioManagerInstance = getAudioManager('');
 
-const handlePlay = () => {
-  audioManagerInstance.play();
-};
-
-const handlePause = () => {
-  audioManagerInstance.pause();
-};
-
 const handleSelect = (selectedStation) => {
   audioManagerInstance.select(selectedStation);
 };
@@ -22,6 +14,8 @@ const Content = (props) => {
 
   return (
     <div data-testid="content" className={styles.Content}>
+      <p className={styles.ContentHeadline}>Your favourite radio stations</p>
+
       <StationsList handleSelect={handleSelect}>
         {radioStationsLS.map((station, i) => (
           <StationsListItem
@@ -29,7 +23,7 @@ const Content = (props) => {
             title={station.name}
             title2={station.link}
             button={true}
-          ></StationsListItem>
+          />
         ))}
       </StationsList>
     </div>
