@@ -1,18 +1,18 @@
 import React, { useRef, useEffect } from 'react';
 import FocusTrap from 'focus-trap-react';
 import ReactDom from 'react-dom';
-import Button from './Button';
 import styles from './Modal.module.scss';
 
 const ModalDefault = ({ children, isModalOpen, setModalIsOpen }) => {
   const portal = useRef(document.createElement('div'));
 
   useEffect(() => {
-    document.body.appendChild(portal.current);
-    portal.current.classList.add('Modal');
+    const divPortal = portal.current;
+    document.body.appendChild(divPortal);
+    divPortal.classList.add('Modal');
 
     return () => {
-      portal.current.parentNode.removeChild(portal.current);
+      divPortal.parentNode.removeChild(divPortal);
     };
   }, []);
 
