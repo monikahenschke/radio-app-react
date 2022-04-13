@@ -1,7 +1,6 @@
 export function shortenUrl(longUrl) {
   let domainNameShortened;
   const splitedUrl = longUrl.split('/').filter((v) => v);
-  console.log(splitedUrl.length);
   const domainName = splitedUrl[1].substr(0, splitedUrl[1].lastIndexOf('.'));
   if (domainName.length > 10) {
     domainNameShortened = domainName.slice(0, 10) + '...';

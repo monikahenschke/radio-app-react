@@ -1,7 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import FocusTrap from 'focus-trap-react';
 import ReactDom from 'react-dom';
-import Button from './Button';
 import styles from './Modal.module.scss';
 
 const ModalDefault = ({ children, isModalOpen, setModalIsOpen }) => {
