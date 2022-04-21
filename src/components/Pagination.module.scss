@@ -1,4 +1,6 @@
 
+@import 'src/styles/colors';
+
 .paginationContainer {
     display: flex;
     justify-content: center;
@@ -14,11 +16,21 @@
         cursor: not-allowed;
         pointer-events: all !important;
     }  
+}
 
+.page{
+    color: $headline-color;
 }
 
 .active {
     font-weight: 600;
+    color: $black-color;
+}
+.dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
 }
 
 .prev, .next, .pages {

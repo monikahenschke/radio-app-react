@@ -13,7 +13,6 @@ const handleSelect = (selectedStation) => {
 };
 
 const Content = (props) => {
-  const [activePageIDState, setActivePageIDState] = useState(1);
   const [stationsListCurrentlyShownState, setStationsListCurrentlyShownState] =
     useState([]);
 
@@ -37,10 +36,8 @@ const Content = (props) => {
       </StationsList>
       <Pagination
         itemsPerPage={4}
-        listOfItem={radioStationsListLS}
-        activePageIDState={activePageIDState}
-        setActivePageIDState={setActivePageIDState}
-        setItemsListCurrentlyShownState={setStationsListCurrentlyShownState}
+        listOfItems={radioStationsListLS}
+        setCurrentPageItems={setStationsListCurrentlyShownState}
       />
     </div>
   );

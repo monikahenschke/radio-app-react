@@ -1,8 +1,9 @@
 import React from 'react';
-import { useMemo, useEffect } from 'react';
+import { useMemo, useEffect, useState } from 'react';
 import { array, func } from 'prop-types';
 
 import styles from './Pagination.module.scss';
+import { PaginationItem } from './PaginationItem';
 
 import { ReactComponent as Leftarrow } from '../images/leftarrow.svg';
 import { ReactComponent as Rightarrow } from '../images/rightarrow.svg';
@@ -11,13 +12,13 @@ import { number } from 'prop-types';
 
 export const Pagination = ({
   itemsPerPage,
-  listOfItem,
-  activePageIDState,
-  setActivePageIDState,
-  setItemsListCurrentlyShownState,
+  listOfItems,
+  setCurrentPageItems,
 }) => {
+  const [activePageIDState, setActivePageIDState] = useState(1);
+
   const totalPages = useMemo(() => {
-    return calculateNumberOfPages(listOfItem);
+    return calculateNumberOfPages(listOfItems);
 
     function calculateNumberOfPages(list) {
       if (list.length > 0) {
@@ -25,37 +26,22 @@ export const Pagination = ({
         return totalPages;
       }
     }
-  }, [itemsPerPage, listOfItem]);
-
-  const pagesNumbers = useMemo(() => {
-    // return Array.from(Array(totalPages + 1).keys()).slice(1);
-
-    const numbersOfPages = [];
-    for (let i = 1; i <= totalPages; i++) {
-      numbersOfPages.push(i);
-    }
-    return numbersOfPages;
-  }, [totalPages]);
+  }, [itemsPerPage, listOfItems]);
 
   useEffect(() => {
     const itemsListOnCurrentPage = getListItemsOnCurrentPage(activePageIDState);
-    setItemsListCurrentlyShownState(itemsListOnCurrentPage);
+    setCurrentPageItems(itemsListOnCurrentPage);
 
     function getListItemsOnCurrentPage(activePageIDState) {
       const positionOfFirstItemOnPage = (activePageIDState - 1) * itemsPerPage;
       const positionOLastItemOnPage = positionOfFirstItemOnPage + itemsPerPage;
 
-      return listOfItem.slice(
+      return listOfItems.slice(
         positionOfFirstItemOnPage,
         positionOLastItemOnPage
       );
     }
-  }, [
-    activePageIDState,
-    itemsPerPage,
-    setItemsListCurrentlyShownState,
-    listOfItem,
-  ]);
+  }, [activePageIDState, itemsPerPage, setCurrentPageItems, listOfItems]);
 
   const nextButtonDisabled = useMemo(
     () => totalPages === activePageIDState,
@@ -81,6 +67,50 @@ export const Pagination = ({
     setActivePageIDState(activePageIDState + 1);
   }
 
+  const createPagesNumbers = useMemo(() => {
+    // return Array.from(Array(totalPages + 1).keys()).slice(1);
+    const numbersOfPages = [];
+    for (let i = 1; i <= totalPages; i++) {
+      let page;
+      let isActive;
+
+      if (totalPages < 6) {
+        isActive = true;
+        page = {
+          pageNumber: i,
+          isActive: isActive,
+        };
+      } else {
+        if (
+          (((activePageIDState === 1 && i > 2) ||
+            (activePageIDState < 4 && i >= 5) ||
+            (activePageIDState === 4 && i >= 6) ||
+            (activePageIDState >= 5 &&
+              activePageIDState < 9 &&
+              i > 2 &&
+              (i < activePageIDState - 1 || i > activePageIDState + 1))) &&
+            i < totalPages - 1) ||
+          (activePageIDState >= 9 && i > 2 && i < activePageIDState - 1)
+        ) {
+          isActive = false;
+          page = {
+            pageNumber: i,
+            isActive: isActive,
+          };
+        } else {
+          isActive = true;
+          page = {
+            pageNumber: i,
+            isActive: isActive,
+          };
+        }
+      }
+
+      numbersOfPages.push(page);
+    }
+    return numbersOfPages;
+  }, [totalPages, activePageIDState]);
+
   return (
     <nav className={styles.paginationContainer}>
       <ul className={styles.pagination}>
@@ -94,20 +124,24 @@ export const Pagination = ({
             Previous
           </Button>
         </li>
-        {pagesNumbers.map((number) => {
-          const activePage = activePageIDState === number ? styles.active : '';
-          return (
-            <li className={styles.pages} key={number}>
-              <Button
-                onClick={() => {
-                  onPageChange(number);
-                }}
-              >
-                <span className={activePage}>{number}</span>
-              </Button>
-            </li>
+        {createPagesNumbers.map(({ pageNumber, isActive }, i) => {
+          let drawDots = !isActive && createPagesNumbers[i - 1]?.isActive;
+
+          return !drawDots ? (
+            <PaginationItem
+              page={pageNumber}
+              onPageChange={() => onPageChange(pageNumber)}
+              isActive={isActive}
+              key={i}
+              activePageIDState={activePageIDState}
+            />
+          ) : (
+            <span className={styles.dots} key={i}>
+              ...
+            </span>
           );
         })}
+
         <li className={styles.next} key="Next">
           <Button
             iconOnly={true}
@@ -124,9 +158,7 @@ export const Pagination = ({
 };
 
 Pagination.propTypes = {
-  listOfItem: array.isRequired,
-  activePageIDState: number.isRequired,
-  setActivePageIDState: func.isRequired,
-  setStationsListCurrentlyShownState: func.isRequired,
+  listOfItems: array.isRequired,
+  setCurrentPageItems: func.isRequired,
   itemsPerPage: number.isRequired,
 };
