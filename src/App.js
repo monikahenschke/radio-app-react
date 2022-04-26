@@ -5,12 +5,12 @@ import { setBasicRadioStationsToLS } from './utils/setBasicRadioStations';
 import './styles/App.scss';
 
 function App() {
-  // if (!Cookies.get('visited')) {
-  Cookies.set('visited', true);
-  // set basic radio stations in local storage on first visit
+  if (!Cookies.get('visited')) {
+    Cookies.set('visited', true);
+    // set basic radio stations in local storage on first visit
 
-  setBasicRadioStationsToLS();
-  // }
+    setBasicRadioStationsToLS();
+  }
 
   return (
     <Layout>
