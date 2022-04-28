@@ -9,17 +9,22 @@ export const PaginationItem = ({
   activePageIDState,
   isActive,
 }) => {
-  const activePage = activePageIDState === page ? styles.active : styles.page;
+  const pageClass = activePageIDState === page ? styles.active : styles.page;
+  const isCurrentPage = activePageIDState === page ?? true;
+  const ariaLabel = 'Page ' + page;
 
+  console.log(isCurrentPage);
   return (
     isActive && (
       <li className={cx(styles.pages)} key={page}>
         <Button
+          aria-current={isCurrentPage}
+          aria-label={ariaLabel}
           onClick={() => {
             onPageChange(page);
           }}
         >
-          <span className={activePage}>{page}</span>
+          <span className={pageClass}>{page}</span>
         </Button>
       </li>
     )

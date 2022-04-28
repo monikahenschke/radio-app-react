@@ -120,6 +120,7 @@ export const Pagination = ({
             icon={Leftarrow}
             onClick={onPrevArrowChange}
             disabled={prevButtonDisabled}
+            aria-label="Previous Page"
           >
             Previous
           </Button>
@@ -148,6 +149,7 @@ export const Pagination = ({
             icon={Rightarrow}
             onClick={onNextArrowChange}
             disabled={nextButtonDisabled}
+            aria-label="Next Page"
           >
             Next
           </Button>
