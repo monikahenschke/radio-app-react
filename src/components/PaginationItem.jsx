@@ -13,10 +13,13 @@ export const PaginationItem = ({
   const isCurrentPage = activePageIDState === page ?? true;
   const ariaLabel = 'Page ' + page;
 
-  console.log(isCurrentPage);
   return (
     isActive && (
-      <li className={cx(styles.pages)} key={page}>
+      <li
+        data-testid="testPaginationItem"
+        className={cx(styles.pages)}
+        key={page}
+      >
         <Button
           aria-current={isCurrentPage}
           aria-label={ariaLabel}

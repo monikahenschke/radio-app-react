@@ -4,6 +4,7 @@ import { array, func } from 'prop-types';
 
 import styles from './Pagination.module.scss';
 import { PaginationItem } from './PaginationItem';
+import { calculateNumbersOfPages } from '../utils/calculateNumbersOfPages';
 
 import { ReactComponent as Leftarrow } from '../images/leftarrow.svg';
 import { ReactComponent as Rightarrow } from '../images/rightarrow.svg';
@@ -15,12 +16,12 @@ export const Pagination = ({
   listOfItems,
   setCurrentPageItems,
 }) => {
-  const [activePageIDState, setActivePageIDState] = useState(1);
+  const [currentPageState, setCurrentPageState] = useState(1);
 
   const totalPages = useMemo(() => {
-    return calculateNumberOfPages(listOfItems);
+    return calculateTotalPages(listOfItems);
 
-    function calculateNumberOfPages(list) {
+    function calculateTotalPages(list) {
       if (list.length > 0) {
         const totalPages = Math.ceil(list.length / itemsPerPage);
         return totalPages;
@@ -29,7 +30,7 @@ export const Pagination = ({
   }, [itemsPerPage, listOfItems]);
 
   useEffect(() => {
-    const itemsListOnCurrentPage = getListItemsOnCurrentPage(activePageIDState);
+    const itemsListOnCurrentPage = getListItemsOnCurrentPage(currentPageState);
     setCurrentPageItems(itemsListOnCurrentPage);
 
     function getListItemsOnCurrentPage(activePageIDState) {
@@ -41,75 +42,35 @@ export const Pagination = ({
         positionOLastItemOnPage
       );
     }
-  }, [activePageIDState, itemsPerPage, setCurrentPageItems, listOfItems]);
+  }, [currentPageState, itemsPerPage, setCurrentPageItems, listOfItems]);
 
   const nextButtonDisabled = useMemo(
-    () => totalPages === activePageIDState,
-    [totalPages, activePageIDState]
+    () => totalPages === currentPageState,
+    [totalPages, currentPageState]
   );
   const prevButtonDisabled = useMemo(
-    () => activePageIDState === 1,
-    [activePageIDState]
+    () => currentPageState === 1,
+    [currentPageState]
   );
 
   function onPageChange(pageNumber) {
     if (!pageNumber) {
       throw new Error('Missing number of page!');
     }
-    setActivePageIDState(pageNumber);
+    setCurrentPageState(pageNumber);
   }
 
   function onPrevArrowChange() {
-    setActivePageIDState(activePageIDState - 1);
+    setCurrentPageState(currentPageState - 1);
   }
 
   function onNextArrowChange() {
-    setActivePageIDState(activePageIDState + 1);
+    setCurrentPageState(currentPageState + 1);
   }
 
   const createPagesNumbers = useMemo(() => {
-    // return Array.from(Array(totalPages + 1).keys()).slice(1);
-    const numbersOfPages = [];
-    for (let i = 1; i <= totalPages; i++) {
-      let page;
-      let isActive;
-
-      if (totalPages < 6) {
-        isActive = true;
-        page = {
-          pageNumber: i,
-          isActive: isActive,
-        };
-      } else {
-        if (
-          (((activePageIDState === 1 && i > 2) ||
-            (activePageIDState < 4 && i >= 5) ||
-            (activePageIDState === 4 && i >= 6) ||
-            (activePageIDState >= 5 &&
-              activePageIDState < 9 &&
-              i > 2 &&
-              (i < activePageIDState - 1 || i > activePageIDState + 1))) &&
-            i < totalPages - 1) ||
-          (activePageIDState >= 9 && i > 2 && i < activePageIDState - 1)
-        ) {
-          isActive = false;
-          page = {
-            pageNumber: i,
-            isActive: isActive,
-          };
-        } else {
-          isActive = true;
-          page = {
-            pageNumber: i,
-            isActive: isActive,
-          };
-        }
-      }
-
-      numbersOfPages.push(page);
-    }
-    return numbersOfPages;
-  }, [totalPages, activePageIDState]);
+    return calculateNumbersOfPages(totalPages, currentPageState);
+  }, [totalPages, currentPageState]);
 
   return (
     <nav className={styles.paginationContainer}>
@@ -126,15 +87,13 @@ export const Pagination = ({
           </Button>
         </li>
         {createPagesNumbers.map(({ pageNumber, isActive }, i) => {
-          let drawDots = !isActive && createPagesNumbers[i - 1]?.isActive;
-
-          return !drawDots ? (
+          return pageNumber ? (
             <PaginationItem
               page={pageNumber}
               onPageChange={() => onPageChange(pageNumber)}
               isActive={isActive}
               key={i}
-              activePageIDState={activePageIDState}
+              activePageIDState={currentPageState}
             />
           ) : (
             <span className={styles.dots} key={i}>
