@@ -14,22 +14,20 @@ export const PaginationItem = ({
   const ariaLabel = 'Page ' + page;
 
   return (
-    isActive && (
-      <li
-        data-testid="testPaginationItem"
-        className={cx(styles.pages)}
-        key={page}
+    <li
+      data-testid="testPaginationItem"
+      className={cx(styles.pages)}
+      key={page}
+    >
+      <Button
+        aria-current={isCurrentPage}
+        aria-label={ariaLabel}
+        onClick={() => {
+          onPageChange(page);
+        }}
       >
-        <Button
-          aria-current={isCurrentPage}
-          aria-label={ariaLabel}
-          onClick={() => {
-            onPageChange(page);
-          }}
-        >
-          <span className={pageClass}>{page}</span>
-        </Button>
-      </li>
-    )
+        <span className={pageClass}>{page}</span>
+      </Button>
+    </li>
   );
 };

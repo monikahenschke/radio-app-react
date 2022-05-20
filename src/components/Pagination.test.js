@@ -131,7 +131,7 @@ describe('Pagination component', () => {
     fireEvent.click(nextButton);
     const pagesAfterClick = screen.getAllByTestId('testPaginationItem');
     // pages after click are 1,2,3,4,5,6
-    expect(pagesAfterClick.length === 6).toBeTruthy();
+    expect(pagesAfterClick.length === 5).toBeTruthy();
   });
 });
 
@@ -148,7 +148,7 @@ describe('Function calculateNumbersOfPages', () => {
     expect(result[2].pageNumber).toBeNull();
     expect(result[3].pageNumber).toBe(99);
   });
-  test('should returns all pages', () => {
+  test('should returns all 5 pages', () => {
     const totalPagesMock = 5;
     const currentPageStateMock = 1;
 
@@ -161,4 +161,53 @@ describe('Function calculateNumbersOfPages', () => {
     expect(result[2].pageNumber).toBe(3);
     expect(result[3].pageNumber).toBe(4);
   });
+  test('should returns list of 6', () => {
+    const totalPagesMock = 6;
+    const currentPageStateMock = 5;
+    const result = calculateNumbersOfPages(
+      totalPagesMock,
+      currentPageStateMock
+    );
+    expect(result[2].pageNumber).toBe(null);
+  });
+  test('should returns list of 7', () => {
+    const totalPagesMock = 7;
+    const currentPageStateMock = 3;
+    const result = calculateNumbersOfPages(
+      totalPagesMock,
+      currentPageStateMock
+    );
+    expect(result[2].isActive).toBe(true);
+  });
+  test('should returns list of 20 with current page 12', () => {
+    const totalPagesMock = 20;
+    const currentPageStateMock = 12;
+    const result = calculateNumbersOfPages(
+      totalPagesMock,
+      currentPageStateMock
+    );
+    expect(result[4].isActive).toBe(true);
+  });
+});
+test('should returns list of 99 with current page 97', () => {
+  const totalPagesMock = 99;
+  const currentPageStateMock = 97;
+  const result = calculateNumbersOfPages(totalPagesMock, currentPageStateMock);
+  expect(result[4].isActive).toBe(true);
+  expect(result[2].pageNumber).toBe(null);
+});
+test('should returns list of 99 with current page 98', () => {
+  const totalPagesMock = 99;
+  const currentPageStateMock = 98;
+  const result = calculateNumbersOfPages(totalPagesMock, currentPageStateMock);
+  expect(result[4].isActive).toBe(true);
+  expect(result[3].pageNumber).toBe(97);
+  expect(result[2].pageNumber).toBe(null);
+});
+
+test('should returns list of 14 with current page 13', () => {
+  const totalPagesMock = 14;
+  const currentPageStateMock = 13;
+  const result = calculateNumbersOfPages(totalPagesMock, currentPageStateMock);
+  expect(result[4].isActive).toBe(true);
 });
