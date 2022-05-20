@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useMemo, useEffect, useState } from 'react';
 import { array, func } from 'prop-types';
 
 import styles from './Pagination.module.scss';
 import { PaginationItem } from './PaginationItem';
 import { calculateNumbersOfPages } from '../utils/calculateNumbersOfPages';
+import { getListItemsOnCurrentPage } from '../utils/getListItemsOnCurrentPage';
 
 import { ReactComponent as Leftarrow } from '../images/leftarrow.svg';
 import { ReactComponent as Rightarrow } from '../images/rightarrow.svg';
@@ -16,61 +17,48 @@ export const Pagination = ({
   listOfItems,
   setCurrentPageItems,
 }) => {
-  const [currentPageState, setCurrentPageState] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const totalPages = useMemo(() => {
-    return calculateTotalPages(listOfItems);
-
-    function calculateTotalPages(list) {
-      if (list.length > 0) {
-        const totalPages = Math.ceil(list.length / itemsPerPage);
-        return totalPages;
-      }
+    if (listOfItems.length > 0) {
+      const totalPages = Math.ceil(listOfItems.length / itemsPerPage);
+      return totalPages;
     }
   }, [itemsPerPage, listOfItems]);
 
   useEffect(() => {
-    const itemsListOnCurrentPage = getListItemsOnCurrentPage(currentPageState);
+    const itemsListOnCurrentPage = getListItemsOnCurrentPage(
+      currentPage,
+      listOfItems,
+      itemsPerPage
+    );
     setCurrentPageItems(itemsListOnCurrentPage);
-
-    function getListItemsOnCurrentPage(activePageIDState) {
-      const positionOfFirstItemOnPage = (activePageIDState - 1) * itemsPerPage;
-      const positionOLastItemOnPage = positionOfFirstItemOnPage + itemsPerPage;
-
-      return listOfItems.slice(
-        positionOfFirstItemOnPage,
-        positionOLastItemOnPage
-      );
-    }
-  }, [currentPageState, itemsPerPage, setCurrentPageItems, listOfItems]);
+  }, [currentPage, itemsPerPage, setCurrentPageItems, listOfItems]);
 
   const nextButtonDisabled = useMemo(
-    () => totalPages === currentPageState,
-    [totalPages, currentPageState]
+    () => totalPages === currentPage,
+    [totalPages, currentPage]
   );
-  const prevButtonDisabled = useMemo(
-    () => currentPageState === 1,
-    [currentPageState]
-  );
+  const prevButtonDisabled = useMemo(() => currentPage === 1, [currentPage]);
 
-  function onPageChange(pageNumber) {
+  const onPageChange = useCallback((pageNumber) => {
     if (!pageNumber) {
       throw new Error('Missing number of page!');
     }
-    setCurrentPageState(pageNumber);
-  }
+    return setCurrentPage(pageNumber);
+  }, []);
 
   function onPrevArrowChange() {
-    setCurrentPageState(currentPageState - 1);
+    setCurrentPage((previousCurrentPage) => previousCurrentPage - 1);
   }
 
   function onNextArrowChange() {
-    setCurrentPageState(currentPageState + 1);
+    setCurrentPage((previousCurrentPage) => previousCurrentPage + 1);
   }
 
   const createPagesNumbers = useMemo(() => {
-    return calculateNumbersOfPages(totalPages, currentPageState);
-  }, [totalPages, currentPageState]);
+    return calculateNumbersOfPages(totalPages, currentPage);
+  }, [totalPages, currentPage]);
 
   return (
     <nav className={styles.paginationContainer}>
@@ -93,7 +81,7 @@ export const Pagination = ({
               onPageChange={() => onPageChange(pageNumber)}
               isActive={isActive}
               key={i}
-              activePageIDState={currentPageState}
+              activePageID={currentPage}
             />
           ) : (
             <span className={styles.dots} key={i}>

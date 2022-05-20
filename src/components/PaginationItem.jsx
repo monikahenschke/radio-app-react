@@ -6,11 +6,11 @@ import cx from 'classnames';
 export const PaginationItem = ({
   onPageChange,
   page,
-  activePageIDState,
+  activePageID,
   isActive,
 }) => {
-  const pageClass = activePageIDState === page ? styles.active : styles.page;
-  const isCurrentPage = activePageIDState === page ?? true;
+  const pageClass = activePageID === page ? styles.active : styles.page;
+  const isCurrentPage = activePageID === page ?? true;
   const ariaLabel = 'Page ' + page;
 
   return (
