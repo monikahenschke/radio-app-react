@@ -36,7 +36,7 @@ const Content = (props) => {
           ))}
       </StationsList>
       <Pagination
-        itemsPerPage={4}
+        itemsPerPage={10}
         listOfItems={radioStationsListLS}
         setItemsListCurrentlyShown={setStationsListCurrentlyShown}
       />
