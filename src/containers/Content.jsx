@@ -13,8 +13,9 @@ const handleSelect = (selectedStation) => {
 };
 
 const Content = (props) => {
-  const [stationsListCurrentlyShownState, setStationsListCurrentlyShownState] =
-    useState([]);
+  const [stationsListCurrentlyShown, setStationsListCurrentlyShown] = useState(
+    []
+  );
 
   const radioStationsListLS = useMemo(
     () => JSON.parse(localStorage.getItem('stations')),
@@ -24,8 +25,8 @@ const Content = (props) => {
     <div data-testid="content" className={styles.Content}>
       <p className={styles.ContentHeadline}>Your favourite radio stations</p>
       <StationsList handleSelect={handleSelect}>
-        {stationsListCurrentlyShownState &&
-          stationsListCurrentlyShownState.map((station, i) => (
+        {stationsListCurrentlyShown &&
+          stationsListCurrentlyShown.map((station, i) => (
             <StationsListItem
               key={i}
               title={station.name}
@@ -37,7 +38,7 @@ const Content = (props) => {
       <Pagination
         itemsPerPage={4}
         listOfItems={radioStationsListLS}
-        setCurrentPageItems={setStationsListCurrentlyShownState}
+        setItemsListCurrentlyShown={setStationsListCurrentlyShown}
       />
     </div>
   );

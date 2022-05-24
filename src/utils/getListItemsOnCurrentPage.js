@@ -4,7 +4,7 @@ export function getListItemsOnCurrentPage(
   itemsPerPage
 ) {
   const positionOfFirstItemOnPage = (activePageID - 1) * itemsPerPage;
-  const positionOLastItemOnPage = positionOfFirstItemOnPage + itemsPerPage;
+  const positionOfLastItemOnPage = positionOfFirstItemOnPage + itemsPerPage;
 
-  return listOfItems.slice(positionOfFirstItemOnPage, positionOLastItemOnPage);
+  return listOfItems.slice(positionOfFirstItemOnPage, positionOfLastItemOnPage);
 }

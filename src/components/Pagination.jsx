@@ -15,7 +15,7 @@ import { number } from 'prop-types';
 export const Pagination = ({
   itemsPerPage,
   listOfItems,
-  setCurrentPageItems,
+  setItemsListCurrentlyShown,
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -32,8 +32,8 @@ export const Pagination = ({
       listOfItems,
       itemsPerPage
     );
-    setCurrentPageItems(itemsListOnCurrentPage);
-  }, [currentPage, itemsPerPage, setCurrentPageItems, listOfItems]);
+    setItemsListCurrentlyShown(itemsListOnCurrentPage);
+  }, [currentPage, itemsPerPage, setItemsListCurrentlyShown, listOfItems]);
 
   const nextButtonDisabled = useMemo(
     () => totalPages === currentPage,
@@ -56,7 +56,7 @@ export const Pagination = ({
     setCurrentPage((previousCurrentPage) => previousCurrentPage + 1);
   }
 
-  const createPagesNumbers = useMemo(() => {
+  const numbersOfPages = useMemo(() => {
     return calculateNumbersOfPages(totalPages, currentPage);
   }, [totalPages, currentPage]);
 
@@ -74,7 +74,7 @@ export const Pagination = ({
             Previous
           </Button>
         </li>
-        {createPagesNumbers.map(({ pageNumber, isActive }, i) => {
+        {numbersOfPages.map(({ pageNumber, isActive }, i) => {
           return pageNumber ? (
             <PaginationItem
               page={pageNumber}
@@ -108,6 +108,6 @@ export const Pagination = ({
 
 Pagination.propTypes = {
   listOfItems: array.isRequired,
-  setCurrentPageItems: func.isRequired,
+  setItemsListCurrentlyShown: func.isRequired,
   itemsPerPage: number.isRequired,
 };
