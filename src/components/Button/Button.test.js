@@ -20,6 +20,8 @@ test('check if any text is present (it should not) if you pass the iconOnly and 
 
 test('check if component throws error if you pass the iconOnly but omit the icon porp ', () => {
   const clickPlay = jest.fn();
+  console.error = jest.fn();
+
   expect(() =>
     render(<Button onClick={clickPlay} iconOnly children="Play" />)
   ).toThrow(
