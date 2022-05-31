@@ -1,21 +1,13 @@
+import { useState } from 'react';
+
 import Button from './Button';
 import ModalDefault from './Modal';
 import styles from './BottomBar.module.scss';
-import { useState } from 'react';
+import { AddNewStationForm } from './AddNewStationForm';
+import { addNewRadioStationToLS } from '../utils/addNewRadioStationToLS';
 
 export const BottomBar = () => {
   const [isModalOpen, setModalIsOpen] = useState(false);
-  const radioStationsAddingContentModal = (
-    <div className={styles.addNewStationModal}>
-      <p>Add new radio station</p>
-      <div className={styles.addNewStationInput}>
-        <input type="text" placeholder="Station Stream URL..."></input>
-        <Button size="big" onClick={() => setModalIsOpen(false)}>
-          Save
-        </Button>
-      </div>
-    </div>
-  );
 
   return (
     <div className={styles.bottomBar}>
@@ -32,7 +24,7 @@ export const BottomBar = () => {
         setModalIsOpen={setModalIsOpen}
         buttonName="Add"
       >
-        {radioStationsAddingContentModal}
+        <AddNewStationForm onSubmit={addNewRadioStationToLS} />
       </ModalDefault>
     </div>
   );
