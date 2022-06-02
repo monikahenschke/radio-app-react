@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from './Button';
-import { ReactComponent as IconComponent } from '../images/play-large.svg';
+import { ReactComponent as IconComponent } from '../../images/play-large.svg';
 
 export default {
   title: 'Button',

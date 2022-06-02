@@ -1,9 +1,18 @@
 import { useForm } from 'react-hook-form';
+import { useContext } from 'react';
 import cx from 'classnames';
 
 import styles from './AddNewStationForm.module.scss';
+import { StationsContext } from '../../context/StationsContext';
 
-export const AddNewStationForm = ({ onSubmit }) => {
+export const AddNewStationForm = () => {
+  const {
+    setModalIsOpen,
+    radioStationsListLS,
+    setRadioStationsListLS,
+    addNewRadioStationToLS,
+  } = useContext(StationsContext);
+
   const {
     register,
     handleSubmit,
@@ -14,10 +23,19 @@ export const AddNewStationForm = ({ onSubmit }) => {
   const stationUrlValue = getValues('stationUrl');
   const stationName = getValues('stationName');
 
+  const onSubmitHandle = (data, e) => {
+    addNewRadioStationToLS(
+      data,
+      setModalIsOpen,
+      radioStationsListLS,
+      setRadioStationsListLS
+    );
+  };
+
   return (
     <div className={styles.addNewStationModal}>
       <p>Add new radio station</p>
-      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+      <form className={styles.form} onSubmit={handleSubmit(onSubmitHandle)}>
         <div className={styles.InputWrapper}>
           <input
             className={styles.textInput}

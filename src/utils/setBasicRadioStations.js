@@ -233,4 +233,5 @@ const radioStationsArray = [
 
 export function setBasicRadioStationsToLS() {
   localStorage.setItem('stations', JSON.stringify(radioStationsArray));
+  console.log('stations set in ls');
 }

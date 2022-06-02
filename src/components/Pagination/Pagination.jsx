@@ -4,12 +4,12 @@ import { array, func } from 'prop-types';
 
 import styles from './Pagination.module.scss';
 import { PaginationItem } from './PaginationItem';
-import { calculateNumbersOfPages } from '../utils/calculateNumbersOfPages';
-import { getListItemsOnCurrentPage } from '../utils/getListItemsOnCurrentPage';
+import { calculateNumbersOfPages } from '../../utils/calculateNumbersOfPages';
+import { getListItemsOnCurrentPage } from '../../utils/getListItemsOnCurrentPage';
 
-import { ReactComponent as Leftarrow } from '../images/leftarrow.svg';
-import { ReactComponent as Rightarrow } from '../images/rightarrow.svg';
-import Button from './Button';
+import { ReactComponent as Leftarrow } from '../../images/leftarrow.svg';
+import { ReactComponent as Rightarrow } from '../../images/rightarrow.svg';
+import Button from '../Button/Button';
 import { number } from 'prop-types';
 
 export const Pagination = ({
@@ -20,10 +20,8 @@ export const Pagination = ({
   const [currentPage, setCurrentPage] = useState(1);
 
   const totalPages = useMemo(() => {
-    if (listOfItems.length > 0) {
-      const totalPages = Math.ceil(listOfItems.length / itemsPerPage);
-      return totalPages;
-    }
+    const totalPages = Math.ceil(listOfItems.length / itemsPerPage);
+    return totalPages;
   }, [itemsPerPage, listOfItems]);
 
   useEffect(() => {

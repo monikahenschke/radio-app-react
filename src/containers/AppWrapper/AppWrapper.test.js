@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom/extend-expect';
 import { render, screen } from '@testing-library/react';
 import { Layout } from './Layout';
-import Content from '../containers/Content';
+import Content from './Content';
 
 const radioStationsArray = [
   {

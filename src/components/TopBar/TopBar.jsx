@@ -1,5 +1,5 @@
-import { ReactComponent as playIconBig } from '../images/play-large.svg';
-import Button from '../components/Button';
+import { ReactComponent as playIconBig } from '../../images/play-large.svg';
+import Button from '../Button/Button';
 import styles from './TopBar.module.scss';
 
 export const TopBar = () => {

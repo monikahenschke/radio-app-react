@@ -1,9 +1,11 @@
-import React from 'react';
-import '@testing-library/jest-dom/extend-expect';
-import Button from './Button';
 import { render, screen } from '@testing-library/react';
 import fireEvent from '@testing-library/user-event';
-import { ReactComponent as IconLarge } from '../images/play-large.svg';
+import React from 'react';
+import '@testing-library/jest-dom/extend-expect';
+
+import Button from './Button';
+
+import { ReactComponent as IconLarge } from '../../images/play-large.svg';
 
 test('check if any text is present (it should not) if you pass the iconOnly and icon props.', () => {
   const clickPlay = jest.fn();

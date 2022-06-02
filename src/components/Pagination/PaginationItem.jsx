@@ -1,7 +1,8 @@
 import React from 'react';
-import Button from './Button';
-import styles from './Pagination.module.scss';
 import cx from 'classnames';
+
+import Button from '../Button/Button';
+import styles from './Pagination.module.scss';
 
 export const PaginationItem = ({
   onPageChange,
