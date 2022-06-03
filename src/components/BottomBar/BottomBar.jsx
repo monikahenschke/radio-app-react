@@ -12,7 +12,7 @@ export const BottomBar = () => {
   return (
     <div className={styles.bottomBar}>
       <Button onClick={() => setIsModalOpen(true)}>
-        {'Add new radio station'}
+        Add new radio station
       </Button>
 
       <ModalDefault buttonName="Add">
