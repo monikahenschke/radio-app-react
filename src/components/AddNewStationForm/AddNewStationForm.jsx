@@ -7,10 +7,10 @@ import { StationsContext } from '../../context/StationsContext';
 
 export const AddNewStationForm = () => {
   const {
-    setModalIsOpen,
+    setIsModalOpen,
     radioStationsListLS,
     setRadioStationsListLS,
-    addNewRadioStationToLS,
+    addNewRadioStation,
   } = useContext(StationsContext);
 
   const {
@@ -23,10 +23,10 @@ export const AddNewStationForm = () => {
   const stationUrlValue = getValues('stationUrl');
   const stationName = getValues('stationName');
 
-  const onSubmitHandle = (data, e) => {
-    addNewRadioStationToLS(
+  const onSubmit = (data, e) => {
+    addNewRadioStation(
       data,
-      setModalIsOpen,
+      setIsModalOpen,
       radioStationsListLS,
       setRadioStationsListLS
     );
@@ -35,7 +35,7 @@ export const AddNewStationForm = () => {
   return (
     <div className={styles.addNewStationModal}>
       <p>Add new radio station</p>
-      <form className={styles.form} onSubmit={handleSubmit(onSubmitHandle)}>
+      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.InputWrapper}>
           <input
             className={styles.textInput}

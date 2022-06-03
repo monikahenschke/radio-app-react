@@ -19,10 +19,10 @@ export const Pagination = ({
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
 
-  const totalPages = useMemo(() => {
-    const totalPages = Math.ceil(listOfItems.length / itemsPerPage);
-    return totalPages;
-  }, [itemsPerPage, listOfItems]);
+  const totalPages = useMemo(
+    () => Math.ceil(listOfItems.length / itemsPerPage),
+    [itemsPerPage, listOfItems]
+  );
 
   useEffect(() => {
     const itemsListOnCurrentPage = getListItemsOnCurrentPage(

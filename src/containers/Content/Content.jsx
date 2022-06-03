@@ -8,7 +8,6 @@ import { Pagination } from '../../components/Pagination/Pagination';
 import { StationsContext } from '../../context/StationsContext';
 
 const audioManagerInstance = getAudioManager('');
-let counter = 0;
 const handleSelect = (selectedStation) => {
   audioManagerInstance.select(selectedStation);
 };
@@ -21,7 +20,6 @@ const Content = (props) => {
 
   return (
     <div data-testid="content" className={styles.Content}>
-      <p>Render: {counter++}</p>
       <p className={styles.ContentHeadline}>Your favourite radio stations</p>
       <StationsList handleSelect={handleSelect}>
         {stationsListCurrentlyShown &&

@@ -5,7 +5,7 @@ import { setBasicRadioStationsToLS } from '../utils/setBasicRadioStations';
 export const StationsContext = createContext();
 
 export const StationsContextProvider = ({ children }) => {
-  const [isModalOpen, setModalIsOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [radioStationsListLS, setRadioStationsListLS] = useState([]);
 
   useEffect(() => {
@@ -22,17 +22,17 @@ export const StationsContextProvider = ({ children }) => {
     setRadioStationsListLS(radioStations);
   }
 
-  function addNewRadioStationToLS(data, setModalIsOpen, radioStationsListLS) {
+  function addNewRadioStation(data, setModalIsOpen, radioStationsListLS) {
     setModalIsOpen(false);
 
-    const stationFromForm = getRadioStationFromForm(data);
+    const stationFromForm = createRadioStationFromData(data);
     const stationsFromLocalStorage = radioStationsListLS;
     stationsFromLocalStorage.push(stationFromForm);
     localStorage.setItem('stations', JSON.stringify(stationsFromLocalStorage));
     refreshRadioStations();
   }
 
-  function getRadioStationFromForm(data) {
+  function createRadioStationFromData(data) {
     const newUniqueId = Date.now();
     const radioStationAdded = {
       id: newUniqueId,
@@ -46,9 +46,9 @@ export const StationsContextProvider = ({ children }) => {
     <StationsContext.Provider
       value={{
         isModalOpen,
-        setModalIsOpen,
+        setIsModalOpen,
         radioStationsListLS,
-        addNewRadioStationToLS,
+        addNewRadioStation,
         refreshRadioStations,
       }}
     >

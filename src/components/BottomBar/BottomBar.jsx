@@ -7,15 +7,11 @@ import styles from './BottomBar.module.scss';
 import { AddNewStationForm } from '../AddNewStationForm/AddNewStationForm';
 
 export const BottomBar = () => {
-  const { setModalIsOpen } = useContext(StationsContext);
+  const { setIsModalOpen } = useContext(StationsContext);
 
   return (
     <div className={styles.bottomBar}>
-      <Button
-        onClick={() => {
-          setModalIsOpen(true);
-        }}
-      >
+      <Button onClick={() => setIsModalOpen(true)}>
         {'Add new radio station'}
       </Button>
 
