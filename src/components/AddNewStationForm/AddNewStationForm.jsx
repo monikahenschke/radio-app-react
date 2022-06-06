@@ -1,6 +1,5 @@
 import { useForm } from 'react-hook-form';
 import { useContext } from 'react';
-import cx from 'classnames';
 
 import styles from './AddNewStationForm.module.scss';
 import { StationsContext } from '../../context/StationsContext';
@@ -35,12 +34,17 @@ export const AddNewStationForm = () => {
   return (
     <div className={styles.addNewStationModal}>
       <p>Add new radio station</p>
-      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+      <form
+        data-testid="add-new-station-form"
+        className={styles.form}
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <div className={styles.InputWrapper}>
           <input
             className={styles.textInput}
             aria-describedby="stationNameErrorMessage"
             id="stationName"
+            aria-label="stationName"
             type="text"
             {...register('stationName', {
               required: 'required',
@@ -51,10 +55,11 @@ export const AddNewStationForm = () => {
             })}
           ></input>
           <label
-            className={cx(styles.Label, stationName && styles.hide)}
+            data-testid="labelTest"
+            className={styles.Label}
             htmlFor="stationName"
           >
-            Name
+            {!stationName && 'Name'}
           </label>
         </div>
         <div id="stationNameErrorMessage" className={styles.errorMessage}>
@@ -65,6 +70,7 @@ export const AddNewStationForm = () => {
           <input
             className={styles.textInput}
             id="stationUrl"
+            aria-label="stationUrl"
             aria-describedby="stationUrlErrorMessage"
             type="text"
             {...register('stationUrl', {
@@ -75,11 +81,8 @@ export const AddNewStationForm = () => {
               },
             })}
           ></input>
-          <label
-            className={cx(styles.Label, stationUrlValue && styles.hide)}
-            htmlFor="stationUrl"
-          >
-            Station Stream URL...
+          <label className={styles.Label} htmlFor="stationUrl">
+            {!stationUrlValue && 'Station Stream URL...'}
           </label>
         </div>
         <div id="stationUrlErrorMessage" className={styles.errorMessage}>
