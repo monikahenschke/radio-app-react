@@ -1,6 +1,6 @@
 class AudioManager {
-  constructor(url) {
-    this.audio = new Audio(url);
+  constructor() {
+    this.audio = new Audio();
   }
 
   play() {
@@ -31,8 +31,6 @@ class AudioManager {
 }
 
 let audioManagerInstance = null;
-const getAudioManager = (url) => {
-  return (audioManagerInstance ??= new AudioManager(url));
+export const getAudioManager = () => {
+  return (audioManagerInstance ??= new AudioManager());
 };
-
-export default getAudioManager;
