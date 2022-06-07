@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { Pagination } from './Pagination';
-import { calculateNumbersOfPages } from '../utils/calculateNumbersOfPages';
+import { calculateNumbersOfPages } from '../../utils/calculateNumbersOfPages';
 
 const itemsArray = [
   {
@@ -62,7 +62,7 @@ describe('Pagination component', () => {
       <Pagination
         itemsPerPage={2}
         listOfItems={itemsArray}
-        setCurrentPageItems={fnMock}
+        setItemsListCurrentlyShown={fnMock}
       />
     );
     const pages = screen.getAllByTestId('testPaginationItem');
@@ -75,7 +75,7 @@ describe('Pagination component', () => {
       <Pagination
         itemsPerPage={1}
         listOfItems={itemsArray}
-        setCurrentPageItems={fnMock}
+        setItemsListCurrentlyShown={fnMock}
       />
     );
     const pages = screen.getAllByTestId('testPaginationItem');
@@ -87,7 +87,7 @@ describe('Pagination component', () => {
       <Pagination
         itemsPerPage={2}
         listOfItems={itemsArray}
-        setCurrentPageItems={fnMock}
+        setItemsListCurrentlyShown={fnMock}
       />
     );
     const secondPage = screen.getByRole('button', {
@@ -107,7 +107,7 @@ describe('Pagination component', () => {
       <Pagination
         itemsPerPage={2}
         listOfItems={itemsArray}
-        setCurrentPageItems={fnMock}
+        setItemsListCurrentlyShown={fnMock}
       />
     );
     const buttons = screen.getAllByRole('button', { name: /Page/i });
@@ -120,7 +120,7 @@ describe('Pagination component', () => {
       <Pagination
         itemsPerPage={1}
         listOfItems={itemsArray}
-        setCurrentPageItems={fnMock}
+        setItemsListCurrentlyShown={fnMock}
       />
     );
 

@@ -1,7 +1,8 @@
 import '@testing-library/jest-dom/extend-expect';
 import { render, screen } from '@testing-library/react';
-import { Layout } from './Layout';
-import Content from './Content';
+import { AppWrapper } from './AppWrapper';
+import Content from '../Content/Content';
+import { StationsContextProvider } from '../../context/StationsContext';
 
 const radioStationsArray = [
   {
@@ -32,7 +33,11 @@ const radioStationsArray = [
 ];
 
 test('if layout component renders properly', () => {
-  render(<Layout />);
+  render(
+    <StationsContextProvider>
+      <AppWrapper />
+    </StationsContextProvider>
+  );
   const divTested = screen.getByTestId('layout');
   expect(divTested).toBeInTheDocument();
 });
@@ -61,9 +66,11 @@ test('if layout component renders the content properly', () => {
   localStorageMock.setItem('stations', JSON.stringify(radioStationsArray));
 
   render(
-    <Layout>
-      <Content />
-    </Layout>
+    <StationsContextProvider>
+      <AppWrapper>
+        <Content />
+      </AppWrapper>
+    </StationsContextProvider>
   );
   const divTested = screen.getByTestId('content');
   expect(divTested).toBeInTheDocument();

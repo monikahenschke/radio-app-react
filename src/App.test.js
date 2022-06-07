@@ -4,8 +4,8 @@ import '@testing-library/jest-dom/extend-expect';
 
 import App from './App.js';
 
-jest.mock('./components/Layout', () => ({
-  Layout: () => {
+jest.mock('./containers/AppWrapper/AppWrapper', () => ({
+  AppWrapper: () => {
     return <div data-testid="layoutTest" />;
   },
 }));
