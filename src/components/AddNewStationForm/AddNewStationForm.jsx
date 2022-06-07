@@ -16,11 +16,10 @@ export const AddNewStationForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-    getValues,
+    watch,
   } = useForm({ mode: 'onChange' });
 
-  const stationUrlValue = getValues('stationUrl');
-  const stationName = getValues('stationName');
+  const { stationName, stationUrl } = watch();
 
   const onSubmit = (data, e) => {
     addNewRadioStation(
@@ -58,6 +57,7 @@ export const AddNewStationForm = () => {
             data-testid="labelTest"
             className={styles.Label}
             htmlFor="stationName"
+            hidden={stationName && 'hidden'}
           >
             {!stationName && 'Name'}
           </label>
@@ -77,12 +77,16 @@ export const AddNewStationForm = () => {
               required: 'required',
               pattern: {
                 value: /^https?:\/\/.*[\\/].+\.(mp3|acc|ogg|m4u|m4a)$/,
-                message: 'invalid email address',
+                message: 'invalid url',
               },
             })}
           ></input>
-          <label className={styles.Label} htmlFor="stationUrl">
-            {!stationUrlValue && 'Station Stream URL...'}
+          <label
+            className={styles.Label}
+            htmlFor="stationUrl"
+            hidden={stationUrl && 'hidden'}
+          >
+            Station Stream URL...
           </label>
         </div>
         <div id="stationUrlErrorMessage" className={styles.errorMessage}>
