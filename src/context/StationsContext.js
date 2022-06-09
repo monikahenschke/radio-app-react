@@ -3,14 +3,14 @@ import Cookies from 'js-cookie';
 
 import { getAudioManager } from '../utils/audio-manager';
 import { setBasicRadioStationsToLS } from '../utils/setBasicRadioStations';
+import { getRandomItem } from '../utils/getRandomItem';
 
 export const StationsContext = createContext();
 
 export const StationsContextProvider = ({ children }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [radioStationsListLS, setRadioStationsListLS] = useState([]);
-  const [stationCurrentlyPlaying, setStationCurrentlyPlaying] =
-    useState(undefined);
+  const [stationCurrentlyPlaying, setStationCurrentlyPlaying] = useState();
   const [isRadioPlaying, setIsRadioPlaying] = useState(false);
 
   useEffect(() => {
@@ -22,11 +22,6 @@ export const StationsContextProvider = ({ children }) => {
     refreshRadioStations();
   }, []);
 
-  function getRandomRadtioStation() {
-    const randomInt = getRandomInt(0, radioStationsListLS.length);
-    return radioStationsListLS[randomInt];
-  }
-
   const audioManagerInstance = useMemo(() => {
     return getAudioManager();
   }, []);
@@ -34,12 +29,6 @@ export const StationsContextProvider = ({ children }) => {
   function refreshRadioStations() {
     let radioStations = JSON.parse(localStorage.getItem('stations'));
     setRadioStationsListLS(radioStations);
-  }
-
-  function getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min)) + min;
   }
 
   function addNewRadioStation(data, setModalIsOpen, radioStationsListLS) {
@@ -64,7 +53,7 @@ export const StationsContextProvider = ({ children }) => {
 
   const handlePlay = () => {
     if (!stationCurrentlyPlaying) {
-      const randomRadioStation = getRandomRadtioStation();
+      const randomRadioStation = getRandomItem(radioStationsListLS);
       audioManagerInstance.select(randomRadioStation.link);
       setStationCurrentlyPlaying(randomRadioStation.name);
     }
