@@ -31,6 +31,8 @@ class AudioManager {
 }
 
 let audioManagerInstance = null;
-export const getAudioManager = () => {
+const getAudioManager = () => {
   return (audioManagerInstance ??= new AudioManager());
 };
+
+export default getAudioManager;

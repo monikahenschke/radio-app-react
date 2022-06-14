@@ -35,24 +35,6 @@ test('if getAudioManager() has been called with no args then play() shouldnt be 
   expect(playMock).not.toHaveBeenCalled();
 });
 
-test(' if getAudioManager() has been called with the argument, then play() should be called', async () => {
-  const instanceOfAudioManager = getAudioManager(
-    'http://icepool.silvacast.com/COUNTRY108.mp3'
-  );
-  await instanceOfAudioManager.play();
-  expect(playMock).toHaveBeenCalled();
-});
-
-test('play() should throw ', async () => {
-  playMock = jest.fn().mockRejectedValue(new Error());
-  console.error = jest.fn();
-
-  const instanceOfAudioManager = getAudioManager(
-    'http://icepool.silvacast.com/COUNTRY108.mp3'
-  );
-  await expect(instanceOfAudioManager.play()).rejects.toThrow();
-});
-
 test('select() with no args passed should throw', () => {
   const instanceOfAudioManager = getAudioManager();
   expect(instanceOfAudioManager.select).toThrow();
