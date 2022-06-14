@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState, useMemo } from 'react';
 import Cookies from 'js-cookie';
 
-import { getAudioManager } from '../utils/audio-manager';
+import getAudioManager from '../utils/audio-manager';
 import { setBasicRadioStationsToLS } from '../utils/setBasicRadioStations';
 import { getRandomItem } from '../utils/getRandomItem';
 
