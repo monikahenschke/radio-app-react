@@ -28,6 +28,9 @@ export const StationsContextProvider = ({ children }) => {
 
   function refreshRadioStations() {
     let radioStations = JSON.parse(localStorage.getItem('stations'));
+    if (radioStations === null) {
+      radioStations = [];
+    }
     setRadioStationsListLS(radioStations);
   }
 
